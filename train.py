@@ -1,6 +1,6 @@
 import torch
 from torch.utils.data import DataLoader
-from models.DualST  import DualST
+from models.stgsp  import STGSP
 from data.dataset import DatasetFactory
 import numpy as np
 import torch.nn as nn
@@ -98,12 +98,12 @@ def train():
                                                 dconf.len_close,
                                                 dconf.len_period,
                                                 dconf.len_trend)
-    model_name = 'dualst'
+    model_name = 'stgsp-001'
     out_dir = out_dir + '/%s' % (model_name)
     os.makedirs(out_dir, exist_ok=True)
 
 
-    model = DualST(dconf)
+    model = STGSP(dconf)
     print('num parameters:',count_parameters(model))
     loss_fn = nn.SmoothL1Loss(beta=0.02)
     loss_tp = nn.CrossEntropyLoss()
